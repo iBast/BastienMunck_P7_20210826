@@ -59,9 +59,6 @@ class AppFixtures extends Fixture
                 ->setRealesedAt(DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-1 year')));
             $manager->persist($product);
         }
-        // $product = new Product();
-        // $manager->persist($product);
-
         $manager->flush();
     }
 }
