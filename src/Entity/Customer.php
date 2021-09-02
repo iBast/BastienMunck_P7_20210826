@@ -8,9 +8,11 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @ORM\Entity(repositoryClass=CustomerRepository::class)
+ * @Serializer\ExclusionPolicy("ALL")
  */
 class Customer implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -18,6 +20,8 @@ class Customer implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * 
+     * @Serializer\Expose
      */
     private $id;
 
@@ -39,6 +43,8 @@ class Customer implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * @Serializer\Expose
      */
     private $Company;
 
