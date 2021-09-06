@@ -1,0 +1,26 @@
+App\Entity\Customer:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: Company
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+              fields: email
+              errorPath: email
+              message: 'This email "{{ value }}" is already in used.'
+    properties:
+        Company:
+            - NotBlank: ~
+            - Length:
+                  min: 3
+                  max: 100
+                  minMessage: 'The Company "{{ value }}" must be more than 3 characters'
+                  maxMessage: 'The Company "{{ value }}" can not be more than 100 characters'
+        email:
+          - Email:
+              message: 'The email "{{ value }}" is not a valid email.'
+          - NotBlank: ~
+          - Length:
+              min: 6
+              max: 255
+              minMessage: 'The Email "{{ value }}" must be more than 6 characters'
+              maxMessage: 'The Email "{{ value }}" can not be more than 100 characters'
+        createdAt:
+          - DateTime: ~
