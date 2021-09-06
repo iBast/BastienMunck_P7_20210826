@@ -25,7 +25,7 @@ class Product
     /**
      * @ORM\Column(type="datetime_immutable")
      */
-    private $realesedAt;
+    private $releasedAt;
 
     /**
      * @ORM\Column(type="text")
@@ -54,14 +54,14 @@ class Product
         return $this;
     }
 
-    public function getRealesedAt(): ?\DateTimeImmutable
+    public function getReleasedAt(): ?\DateTimeImmutable
     {
-        return $this->realesedAt;
+        return $this->releasedAt;
     }
 
-    public function setRealesedAt(\DateTimeImmutable $realesedAt): self
+    public function setReleasedAt(\DateTimeImmutable $releasedAt): self
     {
-        $this->realesedAt = $realesedAt;
+        $this->releasedAt = $releasedAt;
 
         return $this;
     }
