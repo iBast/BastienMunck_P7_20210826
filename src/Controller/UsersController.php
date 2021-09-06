@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Repository\UserRepository;
 use DateTimeImmutable;
+use App\Repository\UserRepository;
+use App\Exception\ResourceValidationException;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
@@ -31,6 +33,12 @@ class UsersController extends AbstractController
      */
     public function create(User $user)
     {
+        if (!$user) {
+            throw new ResourceValidationException(
+                sprintf('Ressource %d not found')
+            );
+        }
+
         $user->setCreatedAt(new DateTimeImmutable());
         // TODO : add the current customer
         // $user->setCustomer();
