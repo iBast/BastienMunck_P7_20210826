@@ -60,9 +60,15 @@ class UsersController extends AbstractController
      */
     public function updateAction(User $user, User $newUser)
     {
-
-        $user->setFirstName($newUser->getFirstName());
-        $user->setLastName($newUser->getLastName());
+        if ($newUser->getFirstName()) {
+            $user->setFirstName($newUser->getFirstName());
+        }
+        if ($newUser->getLastName()) {
+            $user->setLastName($newUser->getLastName());
+        }
+        if ($newUser->getCustomer()) {
+            $user->setCustomer($newUser->getCustomer());
+        }
 
         $this->getDoctrine()->getManager()->flush();
 
