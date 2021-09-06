@@ -19,6 +19,23 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
+    public function search($customerId, $term, $order = 'asc', $limit = 20, $offset = 0)
+    {
+        $qb = $this
+            ->createQueryBuilder('u')
+            ->select('u')
+            ->orderBy('u.title', $order)
+            ->where('u.customer', $customerId);
+
+        if ($term) {
+            $qb
+                ->andwhere('u.title LIKE ?1')
+                ->setParameter(1, '%' . $term . '%');
+        }
+
+        return $this->paginate($qb, $limit, $offset);
+    }
+
     // /**
     //  * @return User[] Returns an array of User objects
     //  */

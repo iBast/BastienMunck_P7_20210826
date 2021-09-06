@@ -19,6 +19,21 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
+    public function search($term, $order = 'asc', $limit = 20, $offset = 0)
+    {
+        $qb = $this
+            ->createQueryBuilder('p')
+            ->select('p')
+            ->orderBy('p.title', $order);
+
+        if ($term) {
+            $qb
+                ->where('p.title LIKE ?1')
+                ->setParameter(1, '%' . $term . '%');
+        }
+
+        return $this->paginate($qb, $limit, $offset);
+    }
     // /**
     //  * @return Product[] Returns an array of Product objects
     //  */
