@@ -18,7 +18,7 @@ class UsersController extends AbstractController
 {
 
     /**
-     * @Rest\Get(path="/users/{id}", name ="user_show", requirements = {"id"="\d+"})
+     * @Rest\Get(path="/api/users/{id}", name ="user_show", requirements = {"id"="\d+"})
      * @view
      */
     public function show(User $user)
@@ -28,7 +28,7 @@ class UsersController extends AbstractController
 
 
     /**
-     * @Rest\Get(path= "/users", name= "users_list")
+     * @Rest\Get(path= "/api/users", name= "users_list")
      * 
      *  * @Rest\QueryParam(
      *     name="keyword",
@@ -78,7 +78,7 @@ class UsersController extends AbstractController
 
     /**
      * @Rest\Post(
-     *    path = "/users",
+     *    path = "/api/users",
      *    name = "user_create"
      * )
      * @Rest\View(StatusCode = 201)
@@ -105,7 +105,7 @@ class UsersController extends AbstractController
     /**
      * @Rest\View(StatusCode = 200)
      * @Rest\Put(
-     *     path = "/users/{id}",
+     *     path = "/api/users/{id}",
      *     name = "user_update",
      *     requirements = {"id"="\d+"}
      * )
@@ -130,7 +130,7 @@ class UsersController extends AbstractController
 
     /**
      * @Rest\Delete(
-     *     path = "/users/{id}",
+     *     path = "/api/users/{id}",
      *     name = "user_delete",
      *     requirements = {"id"="\d+"}
      * )

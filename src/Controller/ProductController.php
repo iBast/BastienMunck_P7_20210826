@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ProductController extends AbstractController
 {
     /**
-     * @Rest\Get(path="/products/{id}", name ="product_show", requirements = {"id"="\d+"})
+     * @Rest\Get(path="/api/products/{id}", name ="product_show", requirements = {"id"="\d+"})
      * @view
      * 
      * @param Product $product
@@ -26,7 +26,7 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Rest\Get(path= "/products", name= "product_list")
+     * @Rest\Get(path= "/api/products", name= "product_list")
      * 
      * @Rest\QueryParam(
      *     name="keyword",
