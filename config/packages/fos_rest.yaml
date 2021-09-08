@@ -11,7 +11,7 @@ fos_rest:
       rules:
           - { path: '^/', priorities: ['json'], fallback_format: 'json' }
     exception:
-        enabled: false
+        enabled: true
         codes:
             { App\Exception\ResourceValidationException: 400 }
         messages:
