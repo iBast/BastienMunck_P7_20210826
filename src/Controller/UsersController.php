@@ -6,21 +6,74 @@ use App\Entity\User;
 use DateTimeImmutable;
 use App\Repository\UserRepository;
 use App\Exception\ResourceValidationException;
+use App\Repository\CustomerRepository;
+use App\Representation\Users;
 use FOS\RestBundle\Controller\Annotations\View;
+use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
-use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class UsersController extends AbstractController
 {
+
     /**
-     * @Rest\Get(path= "/users", name= "users_list")
+     * @Rest\Get(path="/users/{id}", name ="user_show", requirements = {"id"="\d+"})
      * @view
      */
-    public function list(UserRepository $userRepository)
+    public function show(User $user)
     {
-        return $userRepository->findAll();
+        return $user;
+    }
+
+
+    /**
+     * @Rest\Get(path= "/users", name= "users_list")
+     * 
+     *  * @Rest\QueryParam(
+     *     name="keyword",
+     *     requirements="[a-zA-Z0-9]",
+     *     nullable=true,
+     *     description="The keyword to search for."
+     * )
+     * @Rest\QueryParam(
+     *     name="order",
+     *     requirements="asc|desc",
+     *     default="desc",
+     *     description="Sort order (asc or desc)"
+     * )
+     * @Rest\QueryParam(
+     *     name="limit",
+     *     requirements="\d+",
+     *     default="5",
+     *     description="Max number of users per page."
+     * )
+     * @Rest\QueryParam(
+     *     name="page",
+     *     requirements="\d+",
+     *     default="1",
+     *     description="The requested page"
+     * )
+     * 
+     * @view
+     * 
+     * @param ParamFetcherInterface $paramFetcher
+     * @param UserRepository $userRepository
+     * @return Users
+     */
+    public function list(ParamFetcherInterface $paramFetcher, UserRepository $userRepository, CustomerRepository $customerRepository)
+    {
+        $client = $customerRepository->find(13);
+        //TODO : replace 13 by clientID
+        $pager = $userRepository->search(
+            $client->getId(),
+            $paramFetcher->get('keyword'),
+            $paramFetcher->get('order'),
+            $paramFetcher->get('limit'),
+            $paramFetcher->get('page'),
+        );
+
+        return new Users($pager);
     }
 
     /**
@@ -72,15 +125,6 @@ class UsersController extends AbstractController
 
         $this->getDoctrine()->getManager()->flush();
 
-        return $user;
-    }
-
-    /**
-     * @Rest\Get(path="/users/{id}", name ="user_show", requirements = {"id"="\d+"})
-     * @view
-     */
-    public function show(User $user)
-    {
         return $user;
     }
 

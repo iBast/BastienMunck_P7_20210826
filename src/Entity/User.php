@@ -2,11 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UserRepository;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\ExclusionPolicy;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * 
+ * @ExclusionPolicy("all")
  */
 class User
 {
@@ -14,27 +18,37 @@ class User
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * 
+     * @Expose
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * @Expose
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * @Expose
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * 
+     * @Expose
      */
     private $createdAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=Customer::class, inversedBy="users")
      * @ORM\JoinColumn(nullable=false)
+     * 
+     * @Expose
      */
     private $customer;
 

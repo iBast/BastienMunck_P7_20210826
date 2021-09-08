@@ -16,6 +16,7 @@ fos_rest:
             { App\Exception\ResourceValidationException: 400 }
         messages:
             { App\Exception\ResourceValidationException: true }
+    param_fetcher_listener: true
 #    param_fetcher_listener:  true
 #    allowed_methods_listener:  true
 #    routing_loader: true
