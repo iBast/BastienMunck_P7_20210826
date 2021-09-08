@@ -6,7 +6,6 @@ use App\Entity\User;
 use DateTimeImmutable;
 use App\Repository\UserRepository;
 use App\Exception\ResourceValidationException;
-use App\Repository\CustomerRepository;
 use App\Representation\Users;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Request\ParamFetcherInterface;
@@ -23,6 +22,9 @@ class UsersController extends AbstractController
      */
     public function show(User $user)
     {
+        if ($user->getCustomer() !== $this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
         return $user;
     }
 
@@ -61,12 +63,11 @@ class UsersController extends AbstractController
      * @param UserRepository $userRepository
      * @return Users
      */
-    public function list(ParamFetcherInterface $paramFetcher, UserRepository $userRepository, CustomerRepository $customerRepository)
+    public function list(ParamFetcherInterface $paramFetcher, UserRepository $userRepository)
     {
-        $client = $customerRepository->find(13);
-        //TODO : replace 13 by clientID
+        $customer = $this->getUser();
         $pager = $userRepository->search(
-            $client->getId(),
+            $customer->getId(),
             $paramFetcher->get('keyword'),
             $paramFetcher->get('order'),
             $paramFetcher->get('limit'),
@@ -93,8 +94,7 @@ class UsersController extends AbstractController
         }
 
         $user->setCreatedAt(new DateTimeImmutable());
-        // TODO : add the current customer
-        // $user->setCustomer();
+        $user->setCustomer($this->getUser());
         $em = $this->getDoctrine()->getManager();
         $em->persist($user);
         $em->flush();
@@ -113,6 +113,9 @@ class UsersController extends AbstractController
      */
     public function updateAction(User $user, User $newUser)
     {
+        if ($user->getCustomer() !== $this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
         if ($newUser->getFirstName()) {
             $user->setFirstName($newUser->getFirstName());
         }
@@ -138,6 +141,9 @@ class UsersController extends AbstractController
      */
     public function delete(User $user)
     {
+        if ($user->getCustomer() !== $this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
         $this->getDoctrine()->getManager()->remove($user);
         $this->getDoctrine()->getManager()->flush();
         return;
