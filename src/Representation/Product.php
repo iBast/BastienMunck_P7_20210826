@@ -2,16 +2,13 @@
 
 namespace App\Representation;
 
-use App\Entity\Product;
 use Pagerfanta\Pagerfanta;
 use JMS\Serializer\Annotation\Type;
 
-
-class Products
+class Product
 {
-
     /**
-     * @Type("ArrayIterator<App\Entity\Product>")
+     * @Type("array<App\Entity\Product>")
      */
     public $data;
     public $meta;

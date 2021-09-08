@@ -56,7 +56,7 @@ class AppFixtures extends Fixture
             $product->setName('Bilemo Phone v' . $p)
                 ->setDescription($faker->text())
                 ->setPrice($faker->biasedNumberBetween(15000, 99000))
-                ->setRealesedAt(DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-1 year')));
+                ->setReleasedAt(DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-1 year')));
             $manager->persist($product);
         }
         $manager->flush();

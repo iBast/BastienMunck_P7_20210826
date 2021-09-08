@@ -47,10 +47,10 @@ class ProductController extends AbstractController
      *     description="Max number of movies per page."
      * )
      * @Rest\QueryParam(
-     *     name="offset",
+     *     name="page",
      *     requirements="\d+",
      *     default="1",
-     *     description="The pagination offset"
+     *     description="The requested page"
      * )
      * @view
      * 
@@ -65,8 +65,10 @@ class ProductController extends AbstractController
             $paramFetcher->get('keyword'),
             $paramFetcher->get('order'),
             $paramFetcher->get('limit'),
-            $paramFetcher->get('offset')
+            $paramFetcher->get('page')
         );
+
+
 
         return new Products($pager);
     }

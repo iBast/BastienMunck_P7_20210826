@@ -20,7 +20,7 @@ class ProductRepository extends AbstractRepository
         parent::__construct($registry, Product::class);
     }
 
-    public function search($term, $order = 'asc', $limit = 2, $offset = 1)
+    public function search($term, $order = 'asc', $limit = 5, $page = 1)
     {
 
         $qb = $this
@@ -34,7 +34,7 @@ class ProductRepository extends AbstractRepository
                 ->setParameter(1, '%' . $term . '%');
         }
 
-        return $this->paginate($qb, $limit, $offset);
+        return $this->paginate($qb, $limit, $page);
     }
     // /**
     //  * @return Product[] Returns an array of Product objects
