@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\User;
+use App\Entity\Customer;
 use App\Repository\AbstractRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -19,13 +20,14 @@ class UserRepository extends AbstractRepository
         parent::__construct($registry, User::class);
     }
 
-    public function search($customerId, $term, $order = 'asc', $limit = 20, $offset = 1)
+    public function search($customer, $term, $order = 'asc', $limit = 20, $page = 1)
     {
         $qb = $this
             ->createQueryBuilder('u')
             ->select('u')
             ->orderBy('u.lastName', $order)
-            ->where('u.customer', $customerId);
+            ->where('u.customer = :customer')
+            ->setParameter('customer', $customer);
 
         if ($term) {
             $qb
@@ -33,7 +35,7 @@ class UserRepository extends AbstractRepository
                 ->setParameter(1, '%' . $term . '%');
         }
 
-        return $this->paginate($qb, $limit, $offset);
+        return $this->paginate($qb, $limit, $page);
     }
 
     // /**

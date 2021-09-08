@@ -44,7 +44,7 @@ class ProductController extends AbstractController
      *     name="limit",
      *     requirements="\d+",
      *     default="5",
-     *     description="Max number of movies per page."
+     *     description="Max number of products per page."
      * )
      * @Rest\QueryParam(
      *     name="page",
@@ -54,8 +54,8 @@ class ProductController extends AbstractController
      * )
      * @view
      * 
-     * @param ProductRepository $productRepository
      * @param ParamFetcherInterface $paramFetcher
+     * @param ProductRepository $productRepository
      * @return Products
 
      */
