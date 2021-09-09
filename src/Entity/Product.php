@@ -19,40 +19,40 @@ class Product
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      * 
-     * @Serializer\Expose
      * @Serializer\Since("1.0")
+     * @Serializer\Expose
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      * 
-     * @Serializer\Expose
      * @Serializer\Since("1.0")
+     * @Serializer\Expose
      */
     private $name;
 
     /**
      * @ORM\Column(type="datetime_immutable")
      * 
-     * @Serializer\Expose
      * @Serializer\Since("1.0")
+     * @Serializer\Expose
      */
     private $releasedAt;
 
     /**
      * @ORM\Column(type="text")
      * 
-     * @Serializer\Expose
      * @Serializer\Since("1.0")
+     * @Serializer\Expose
      */
     private $description;
 
     /**
      * @ORM\Column(type="integer")
      * 
-     * @Serialiezr\Expose
      * @Serializer\Since("1.0")
+     * @Serialiezr\Expose
      */
     private $price;
 

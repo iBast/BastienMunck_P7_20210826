@@ -18,32 +18,32 @@ class User
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      * 
-     * @Serializer\Expose
      * @Serializer\Since("1.0")
+     * @Serializer\Expose
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      * 
-     * @Serializer\Expose
      * @Serializer\Since("1.0")
+     * @Serializer\Expose
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255)
      * 
-     * @Serializer\Expose
      * @Serializer\Since("1.0")
+     * @Serializer\Expose
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="datetime_immutable")
      * 
-     * @Serializer\Expose
      * @Serializer\Since("1.0")
+     * @Serializer\Expose
      */
     private $createdAt;
 
@@ -51,8 +51,8 @@ class User
      * @ORM\ManyToOne(targetEntity=Customer::class, inversedBy="users")
      * @ORM\JoinColumn(nullable=false)
      * 
-     * @Serializer\Expose
      * @Serializer\Since("1.0")
+     * @Serializer\Expose
      */
     private $customer;
 
