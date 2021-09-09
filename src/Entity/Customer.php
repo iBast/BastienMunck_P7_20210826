@@ -21,6 +21,7 @@ class Customer implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      * 
+     * @Serializer\Since("1.0")
      * @Serializer\Expose
      */
     private $id;
@@ -44,6 +45,7 @@ class Customer implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=255)
      * 
+     * @Serializer\Since("1.0")
      * @Serializer\Expose
      */
     private $Company;
