@@ -43,6 +43,10 @@ use Hateoas\Configuration\Annotation as Hateoas;
  *          absolute = true
  *      )
  * )
+ * @Hateoas\Relation(
+ *     "Company",
+ *     embedded = @Hateoas\Embedded("expr(object.getCustomer())")
+ * )
  */
 class User
 {
@@ -83,9 +87,6 @@ class User
     /**
      * @ORM\ManyToOne(targetEntity=Customer::class, inversedBy="users")
      * @ORM\JoinColumn(nullable=false)
-     * 
-     * @Serializer\Since("1.0")
-     * @Serializer\Expose
      */
     private $customer;
 
