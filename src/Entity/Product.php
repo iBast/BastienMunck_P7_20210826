@@ -5,12 +5,22 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ProductRepository;
 use JMS\Serializer\Annotation as Serializer;
+use Hateoas\Configuration\Annotation as Hateoas;
 
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
  * 
  * @Serializer\ExclusionPolicy("all")
+ * 
+ * @Hateoas\Relation(
+ *      "self",
+ *      href = @Hateoas\Route(
+ *          "product_show",
+ *          parameters = { "id" = "expr(object.getId())" },
+ *          absolute = true
+ *      )
+ * )
  */
 class Product
 {
@@ -52,7 +62,7 @@ class Product
      * @ORM\Column(type="integer")
      * 
      * @Serializer\Since("1.0")
-     * @Serialiezr\Expose
+     * @Serializer\Expose
      */
     private $price;
 
