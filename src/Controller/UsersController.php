@@ -12,12 +12,19 @@ use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use OpenApi\Annotations as OA;
 
 class UsersController extends AbstractController
 {
 
     /**
      * @Rest\Get(path="/api/users/{id}", name ="user_show", requirements = {"id"="\d+"})
+     * 
+     * @OA\Response(response=200, description="Returns the details of one user")
+     * @OA\Response(response=400, description="Resource is not found")
+     * @OA\Response(response=401, description="Invalid JWT token.")
+     * @OA\Response(response=403, description="Access denied - the ressource is not belonging to your company")
+     * 
      * @view
      */
     public function show(User $user)
@@ -57,6 +64,9 @@ class UsersController extends AbstractController
      *     description="The requested page"
      * )
      * 
+     * @OA\Response(response=200, description="Returns the list of users")
+     * @OA\Response(response=401, description="Invalid JWT token.")
+     * 
      * @view
      * 
      * @param ParamFetcherInterface $paramFetcher
@@ -83,6 +93,11 @@ class UsersController extends AbstractController
      *    name = "user_create"
      * )
      * @Rest\View(StatusCode = 201)
+     * 
+     * @OA\Response(response=201, description="Resource was created and associated to the current customer")
+     * @OA\Response(response=400, description="Resource is not found")
+     * @OA\Response(response=401, description="Invalid JWT token.")
+     * 
      * @ParamConverter("user", converter="fos_rest.request_body")
      */
     public function create(User $user)
@@ -109,6 +124,12 @@ class UsersController extends AbstractController
      *     name = "user_update",
      *     requirements = {"id"="\d+"}
      * )
+     * 
+     * @OA\Response(response=201, description="Returns when modifications were apply to the user")
+     * @OA\Response(response=400, description="Resource is not found")
+     * @OA\Response(response=401, description="Invalid JWT token.")
+     * @OA\Response(response=403, description="Access denied - the ressource is not belonging to your company")
+     * 
      * @ParamConverter("newUser", converter="fos_rest.request_body")
      */
     public function updateAction(User $user, User $newUser)
@@ -137,6 +158,12 @@ class UsersController extends AbstractController
      *     name = "user_delete",
      *     requirements = {"id"="\d+"}
      * )
+     * 
+     * @OA\Response(response=204, description="Resource was deleted")
+     * @OA\Response(response=400, description="Resource is not found")
+     * @OA\Response(response=401, description="Invalid JWT token.")
+     * @OA\Response(response=403, description="Access denied - the ressource is not belonging to your company")
+     * 
      * @Rest\View(StatusCode = 204)
      */
     public function delete(User $user)

@@ -9,12 +9,18 @@ use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use OpenApi\Annotations as OA;
 
 
 class ProductController extends AbstractController
 {
     /**
      * @Rest\Get(path="/api/products/{id}", name ="product_show", requirements = {"id"="\d+"})
+     * 
+     * @OA\Response(response=200, description="Returns the details of one product")
+     * @OA\Response(response=400, description="Resource is not found")
+     * @OA\Response(response=401, description="Invalid JWT token.")
+     * 
      * @view
      * 
      * @param Product $product
@@ -27,6 +33,9 @@ class ProductController extends AbstractController
 
     /**
      * @Rest\Get(path= "/api/products", name= "product_list")
+     * 
+     * @OA\Response(response=200, description="Returns the list of products")
+     * @OA\Response(response=401, description="Invalid JWT token.")
      * 
      * @Rest\QueryParam(
      *     name="keyword",
@@ -52,6 +61,7 @@ class ProductController extends AbstractController
      *     default="1",
      *     description="The requested page"
      * )
+     * 
      * @view
      * 
      * @param ParamFetcherInterface $paramFetcher
