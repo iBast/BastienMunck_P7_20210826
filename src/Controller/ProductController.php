@@ -10,6 +10,7 @@ use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use OpenApi\Annotations as OA;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 
 
 class ProductController extends AbstractController
@@ -20,6 +21,8 @@ class ProductController extends AbstractController
      * @OA\Response(response=200, description="Returns the details of one product")
      * @OA\Response(response=400, description="Resource is not found")
      * @OA\Response(response=401, description="Invalid JWT token.")
+     * 
+     * @Cache(expires="tomorrow")
      * 
      * @view
      * 
@@ -61,6 +64,8 @@ class ProductController extends AbstractController
      *     default="1",
      *     description="The requested page"
      * )
+     * 
+     * @Cache(expires="tomorrow")
      * 
      * @view
      * 
