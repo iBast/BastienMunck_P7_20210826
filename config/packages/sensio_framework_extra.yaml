@@ -3,3 +3,5 @@ sensio_framework_extra:
         annotations: false
     view: 
         annotations: true 
+    cache:
+        annotations: true
