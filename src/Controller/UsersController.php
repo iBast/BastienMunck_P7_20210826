@@ -4,15 +4,16 @@ namespace App\Controller;
 
 use App\Entity\User;
 use DateTimeImmutable;
+use App\Representation\Users;
+use OpenApi\Annotations as OA;
 use App\Repository\UserRepository;
 use App\Exception\ResourceValidationException;
-use App\Representation\Users;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use OpenApi\Annotations as OA;
+
 
 class UsersController extends AbstractController
 {
