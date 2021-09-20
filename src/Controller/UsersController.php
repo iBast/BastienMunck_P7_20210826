@@ -98,7 +98,26 @@ class UsersController extends AbstractController
      *    name = "user_create"
      * )
      * @Rest\View(StatusCode = 201)
-     * 
+     * @Rest\RequestParam(
+     *   name="first_name",
+     *   key=null,
+     *   requirements="",
+     *   default=null,
+     *   description="The company user first name",
+     *   strict=true,
+     *   map=false,
+     *   nullable=false
+     * )
+     * @Rest\RequestParam(
+     *   name="last_name",
+     *   key=null,
+     *   requirements="",
+     *   default=null,
+     *   description="The company user last name",
+     *   strict=true,
+     *   map=false,
+     *   nullable=false
+     * )
      * @OA\Response(response=201, description="Resource was created and associated to the current customer")
      * @OA\Response(response=400, description="Resource is not found")
      * @OA\Response(response=401, description="Invalid JWT token.")
@@ -131,7 +150,26 @@ class UsersController extends AbstractController
      *     name = "user_update",
      *     requirements = {"id"="\d+"}
      * )
-     * 
+     * @Rest\RequestParam(
+     *   name="first_name",
+     *   key=null,
+     *   requirements="",
+     *   default=null,
+     *   description="The company user first name",
+     *   strict=true,
+     *   map=false,
+     *   nullable=false
+     * )
+     * @Rest\RequestParam(
+     *   name="last_name",
+     *   key=null,
+     *   requirements="",
+     *   default=null,
+     *   description="The company user last name",
+     *   strict=true,
+     *   map=false,
+     *   nullable=false
+     * )
      * @Rest\View(StatusCode = 200)
      * @OA\Response(response=201, description="Returns when modifications were apply to the user")
      * @OA\Response(response=400, description="Resource is not found")
