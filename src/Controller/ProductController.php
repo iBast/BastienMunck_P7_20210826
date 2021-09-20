@@ -22,7 +22,7 @@ class ProductController extends AbstractController
      * @OA\Response(response=400, description="Resource is not found")
      * @OA\Response(response=401, description="Invalid JWT token.")
      * 
-     * @Cache(expires="tomorrow")
+     * @Cache(expires="tomorrow", public=true)
      * 
      * @OA\Tag(name="Product")
      * 
@@ -67,7 +67,7 @@ class ProductController extends AbstractController
      *     description="The requested page"
      * )
      * 
-     * @Cache(expires="tomorrow")
+     * @Cache(expires="tomorrow", public=true)
      * 
      * @OA\Tag(name="Product")
      * 
