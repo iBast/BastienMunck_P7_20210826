@@ -27,7 +27,8 @@ $ php bin/console make:migration
 $ php bin/console doctrine:migrations:migrate
 ```
 * If you need to procced tests load fixtures into the database with  
-```$ php bin/console doctrine:fixtures:load
+```
+$ php bin/console doctrine:fixtures:load
 ```
 
 ## Usage
