@@ -24,6 +24,8 @@ class ProductController extends AbstractController
      * 
      * @Cache(expires="tomorrow")
      * 
+     * @OA\Tag(name="Product")
+     * 
      * @view
      * 
      * @param Product $product
@@ -66,6 +68,8 @@ class ProductController extends AbstractController
      * )
      * 
      * @Cache(expires="tomorrow")
+     * 
+     * @OA\Tag(name="Product")
      * 
      * @view
      * 

@@ -26,6 +26,8 @@ class UsersController extends AbstractController
      * @OA\Response(response=401, description="Invalid JWT token.")
      * @OA\Response(response=403, description="Access denied - the ressource is not belonging to your company")
      * 
+     * @OA\Tag(name="User")
+     * 
      * @view
      */
     public function show(User $user)
@@ -70,6 +72,8 @@ class UsersController extends AbstractController
      * 
      * @view
      * 
+     * @OA\Tag(name="User")
+     * 
      * @param ParamFetcherInterface $paramFetcher
      * @param UserRepository $userRepository
      * @return Users
@@ -98,6 +102,9 @@ class UsersController extends AbstractController
      * @OA\Response(response=201, description="Resource was created and associated to the current customer")
      * @OA\Response(response=400, description="Resource is not found")
      * @OA\Response(response=401, description="Invalid JWT token.")
+     * @OA\Response(response=415, description="Invalid format. The datas should be sent by JSON")
+     * 
+     * @OA\Tag(name="User")
      * 
      * @ParamConverter("user", converter="fos_rest.request_body")
      */
@@ -119,17 +126,20 @@ class UsersController extends AbstractController
     }
 
     /**
-     * @Rest\View(StatusCode = 200)
      * @Rest\Put(
      *     path = "/api/users/{id}",
      *     name = "user_update",
      *     requirements = {"id"="\d+"}
      * )
      * 
+     * @Rest\View(StatusCode = 200)
      * @OA\Response(response=201, description="Returns when modifications were apply to the user")
      * @OA\Response(response=400, description="Resource is not found")
      * @OA\Response(response=401, description="Invalid JWT token.")
      * @OA\Response(response=403, description="Access denied - the ressource is not belonging to your company")
+     * @OA\Response(response=415, description="Invalid format. The datas should be sent by JSON")
+     * 
+     * @OA\Tag(name="User")
      * 
      * @ParamConverter("newUser", converter="fos_rest.request_body")
      */
@@ -164,6 +174,8 @@ class UsersController extends AbstractController
      * @OA\Response(response=400, description="Resource is not found")
      * @OA\Response(response=401, description="Invalid JWT token.")
      * @OA\Response(response=403, description="Access denied - the ressource is not belonging to your company")
+     * 
+     * @OA\Tag(name="User")
      * 
      * @Rest\View(StatusCode = 204)
      */
