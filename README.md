@@ -2,7 +2,7 @@
 
 ## Context
 
-*This project was made during my OpenClassrooms training path PHP/Symfony [https://openclassrooms.com/fr/paths/59-developpeur-dapplication-php-symfony](More informations here)*
+*This project was made during my OpenClassrooms training path PHP/Symfony* [https://openclassrooms.com/fr/paths/59-developpeur-dapplication-php-symfony](More informations here)
 
 ## Project Installation
 
