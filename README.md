@@ -1,0 +1,2 @@
+# BastienMunck_P7_20210826
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d8556932193648629c4e7df449e7289d)](https://app.codacy.com/gh/iBast/BastienMunck_P7_20210826?utm_source=github.com&utm_medium=referral&utm_content=iBast/BastienMunck_P7_20210826&utm_campaign=Badge_Grade_Settings)
