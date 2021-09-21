@@ -58,7 +58,7 @@ you will get your token like this
 
 Now you can send your request with header : 
 ```
-Authorization = your token
+Authorization = Bearer {your token}
 ```
 
 Routes are :
@@ -73,4 +73,3 @@ POST | /api/users | Create a new user for the company
 PUT | /api/users{id} | Update the user {id} (should be own by the customer)
 DELETE | /api/users/{id} | Delete the user {id} (should be own by the customer)
  
-Header : Accept : application/json;version="1.0"
