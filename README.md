@@ -8,29 +8,29 @@ _This project was made during my OpenClassrooms training path PHP/Symfony_
 
 ## Project Installation
 
-* copy repository git clone [https://github.com/iBast/BastienMunck_P7_20210826.git](https://github.com/iBast/BastienMunck_P7_20210826.git)
-* run 
+  * copy repository git clone [https://github.com/iBast/BastienMunck_P7_20210826.git](https://github.com/iBast/BastienMunck_P7_20210826.git)
+  * run 
 ```console
 $ composer install
 ```
-* update .env file with your informations and define environnment dev or prod
-* Create the database with 
+  * update .env file with your informations and define environnment dev or prod
+  * Create the database with 
 ```console
 $ php bin/console doctrine:database:create
 ```
-* Create your migrations with  
+  * Create your migrations with  
 ```console
 $ php bin/console make:migration
 ```
-* Migrate your migrations to the database with 
+  * Migrate your migrations to the database with 
 ```console
 $ php bin/console doctrine:migrations:migrate
 ```
-* If you need to procced tests load fixtures into the database with  
+  * If you need to procced tests load fixtures into the database with  
 ```console
 $ php bin/console doctrine:fixtures:load
 ```
-* Generate SSH key for JWT
+  * Generate SSH key for JWT
 ```console
 $ mkdir -p config/jwt 
 $ openssl genrsa -out config/jwt/private.pem -aes256 4096
@@ -57,7 +57,7 @@ you will get your token like this
 ```
 
 Now you can send your request with header : 
-```
+```console
 Authorization = Bearer {your token}
 ```
 
