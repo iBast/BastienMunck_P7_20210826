@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use DateTimeImmutable;
+use App\Manager\UserManager;
 use App\Representation\Users;
 use OpenApi\Annotations as OA;
 use App\Repository\UserRepository;
@@ -11,12 +12,19 @@ use App\Exception\ResourceValidationException;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
-
 class UsersController extends AbstractController
 {
+    protected $manager;
+
+    public function __construct(UserManager $manager)
+    {
+        $this->manager = $manager;
+    }
 
     /**
      * @Rest\Get(path="/api/users/{id}", name ="user_show", requirements = {"id"="\d+"})
@@ -131,15 +139,11 @@ class UsersController extends AbstractController
     {
         if (!$user) {
             throw new ResourceValidationException(
-                sprintf('Ressource %d not found')
+                sprintf('Ressource not found')
             );
         }
 
-        $user->setCreatedAt(new DateTimeImmutable());
-        $user->setCustomer($this->getUser());
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($user);
-        $em->flush();
+        $this->manager->validate($user, $this->getUser());
 
         return $user;
     }
@@ -186,17 +190,8 @@ class UsersController extends AbstractController
         if ($user->getCustomer() !== $this->getUser()) {
             throw $this->createAccessDeniedException();
         }
-        if ($newUser->getFirstName()) {
-            $user->setFirstName($newUser->getFirstName());
-        }
-        if ($newUser->getLastName()) {
-            $user->setLastName($newUser->getLastName());
-        }
-        if ($newUser->getCustomer()) {
-            $user->setCustomer($newUser->getCustomer());
-        }
 
-        $this->getDoctrine()->getManager()->flush();
+        $this->manager->update($user, $newUser);
 
         return $user;
     }
