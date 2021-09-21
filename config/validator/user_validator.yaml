@@ -1,9 +1,9 @@
 App\Entity\User:
-    constraints:
-      - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
-          fields: [id]
-          errorPath: id
-          message: 'The id "{{ value }}" is already in used.'
+    constraints: 
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: [lastName, customer]
+            errorPath: lastName
+            message: 'The last name "{{ value }}" is already in used.'
     properties:
         firstName:
             - NotBlank: ~
@@ -20,4 +20,4 @@ App\Entity\User:
                 minMessage: 'The Last Name "{{ value }}" must be more than 1 characters'
                 maxMessage: 'The Last Name "{{ value }}" can not be more than 100 characters'
         createdAt:
-          - DateTime: ~
+            - NotBlank: ~
