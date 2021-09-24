@@ -7,6 +7,7 @@ use DateTimeImmutable;
 use App\Entity\Customer;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Exception\ResourceValidationException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class UserManager
@@ -28,7 +29,7 @@ class UserManager
         $errors = $this->validator->validate($user);
         if (count($errors) > 0) {
             $errorsString = (string) $errors;
-            throw new ResourceValidationException($errorsString);
+            throw new BadRequestHttpException($errorsString, null, 400);
         }
 
         $this->manager->persist($user);
@@ -47,7 +48,7 @@ class UserManager
         $errors = $this->validator->validate($user);
         if (count($errors) > 0) {
             $errorsString = (string) $errors;
-            throw new ResourceValidationException($errorsString);
+            throw new BadRequestHttpException($errorsString, null, 400);
         }
 
         $this->manager->persist($user);
