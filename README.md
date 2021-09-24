@@ -23,26 +23,24 @@ APP_SECRET=$$$YOUR*SECRET$$$
 DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name?serverVersion=5.7"
 OR
 DATABASE_URL="postgresql://db_user:db_password@127.0.0.1:5432/bilemo?serverVersion=13&charset=utf8"
-JWT_SECRET_KEY=%kernel.project_dir%/config/jwt/private.pem
-JWT_PUBLIC_KEY=%kernel.project_dir%/config/jwt/public.pem
+
 JWT_PASSPHRASE=$$$passphrase$$$
 ```
 * Create the database with 
 ```console
 $ php bin/console doctrine:database:create
 ```
-* Create your migrations with  
-```console
-$ php bin/console make:migration
-```
+
 * Migrate your migrations to the database with 
 ```console
 $ php bin/console doctrine:migrations:migrate
 ```
+
 * If you need to procced tests load fixtures into the database with  
 ```console
 $ php bin/console doctrine:fixtures:load
 ```
+
 *  Generate the SSL keys
 ```console
 $ php bin/console lexik:jwt:generate-keypair
