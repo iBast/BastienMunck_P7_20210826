@@ -16,7 +16,17 @@ _This project was made during my OpenClassrooms training path PHP/Symfony_
 ```console
 $ composer install
 ```
-* update .env file with your informations and define environnment dev or prod
+* update the following lines in the .env file with your informations:
+```env
+APP_ENV=dev
+APP_SECRET=$$$YOUR*SECRET$$$
+DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name?serverVersion=5.7"
+OR
+DATABASE_URL="postgresql://db_user:db_password@127.0.0.1:5432/bilemo?serverVersion=13&charset=utf8"
+JWT_SECRET_KEY=%kernel.project_dir%/config/jwt/private.pem
+JWT_PUBLIC_KEY=%kernel.project_dir%/config/jwt/public.pem
+JWT_PASSPHRASE=$$$passphrase$$$
+```
 * Create the database with 
 ```console
 $ php bin/console doctrine:database:create
@@ -33,11 +43,9 @@ $ php bin/console doctrine:migrations:migrate
 ```console
 $ php bin/console doctrine:fixtures:load
 ```
-* Generate SSH key for JWT
+*  Generate the SSL keys
 ```console
-$ mkdir -p config/jwt 
-$ openssl genrsa -out config/jwt/private.pem -aes256 4096
-$ openssl rsa -pubout -in config/jwt/private.pem -out config/jwt/public.pem
+$ php bin/console lexik:jwt:generate-keypair
 ```
 
 ## Usage
