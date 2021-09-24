@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Representation\Products;
+use App\Representation\Product as Representation;
 use App\Repository\ProductRepository;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Request\ParamFetcherInterface;
@@ -19,7 +20,7 @@ class ProductController extends AbstractController
      * @Rest\Get(path="/api/products/{id}", name ="product_show", requirements = {"id"="\d+"})
      * 
      * @OA\Response(response=200, description="Returns the details of one product")
-     * @OA\Response(response=400, description="Resource is not found")
+     * @OA\Response(response=404, description="Resource is not found")
      * @OA\Response(response=401, description="Invalid JWT token.")
      * 
      * @Cache(expires="tomorrow", public=true)
@@ -33,7 +34,7 @@ class ProductController extends AbstractController
      */
     public function show(Product $product)
     {
-        return $product;
+        return new Representation($product);
     }
 
     /**

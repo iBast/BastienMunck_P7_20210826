@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use DateTimeImmutable;
+use App\Representation\User as Representation;
 use App\Manager\UserManager;
 use App\Representation\Users;
 use OpenApi\Annotations as OA;
@@ -12,8 +12,6 @@ use App\Exception\ResourceValidationException;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
@@ -30,7 +28,7 @@ class UsersController extends AbstractController
      * @Rest\Get(path="/api/users/{id}", name ="user_show", requirements = {"id"="\d+"})
      * 
      * @OA\Response(response=200, description="Returns the details of one user")
-     * @OA\Response(response=400, description="Resource is not found")
+     * @OA\Response(response=404, description="Resource is not found")
      * @OA\Response(response=401, description="Invalid JWT token.")
      * @OA\Response(response=403, description="Access denied - the ressource is not belonging to your company")
      * 
@@ -43,7 +41,7 @@ class UsersController extends AbstractController
         if ($user->getCustomer() !== $this->getUser()) {
             throw $this->createAccessDeniedException();
         }
-        return $user;
+        return new Representation($user);
     }
 
 
@@ -78,7 +76,7 @@ class UsersController extends AbstractController
      * @OA\Response(response=200, description="Returns the list of users")
      * @OA\Response(response=401, description="Invalid JWT token.")
      * 
-     * @view
+     * @view(StatusCode = 200)
      * 
      * @OA\Tag(name="User")
      * 
@@ -94,7 +92,7 @@ class UsersController extends AbstractController
             $paramFetcher->get('keyword'),
             $paramFetcher->get('order'),
             $paramFetcher->get('limit'),
-            $paramFetcher->get('page'),
+            $paramFetcher->get('page')
         );
 
         return new Users($pager);
@@ -127,8 +125,9 @@ class UsersController extends AbstractController
      *   nullable=false
      * )
      * @OA\Response(response=201, description="Resource was created and associated to the current customer")
-     * @OA\Response(response=400, description="Resource is not found")
+     * @OA\Response(response=400, description="Ressources are not valid.")
      * @OA\Response(response=401, description="Invalid JWT token.")
+     * @OA\Response(response=404, description="Resource is not found")
      * @OA\Response(response=415, description="Invalid format. The datas should be sent by JSON")
      * 
      * @OA\Tag(name="User")
@@ -176,8 +175,9 @@ class UsersController extends AbstractController
      * )
      * @Rest\View(StatusCode = 200)
      * @OA\Response(response=201, description="Returns when modifications were apply to the user")
-     * @OA\Response(response=400, description="Resource is not found")
+     * @OA\Response(response=400, description="Ressources are not valid.")
      * @OA\Response(response=401, description="Invalid JWT token.")
+     * @OA\Response(response=404, description="Resource is not found")
      * @OA\Response(response=403, description="Access denied - the ressource is not belonging to your company")
      * @OA\Response(response=415, description="Invalid format. The datas should be sent by JSON")
      * 
@@ -204,7 +204,7 @@ class UsersController extends AbstractController
      * )
      * 
      * @OA\Response(response=204, description="Resource was deleted")
-     * @OA\Response(response=400, description="Resource is not found")
+     * @OA\Response(response=404, description="Resource is not found")
      * @OA\Response(response=401, description="Invalid JWT token.")
      * @OA\Response(response=403, description="Access denied - the ressource is not belonging to your company")
      * 

@@ -19,6 +19,7 @@ class Products extends AbstractRepresentation
     {
         $this->data = $data;
 
+        $this->addCode(200);
         $this->addMeta('limit', $data->getMaxPerPage());
         $this->addMeta('current_items', iterator_count($data->getCurrentPageResults()));
         $this->addMeta('total_items', $data->getNbResults());

@@ -1,5 +1,6 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d8556932193648629c4e7df449e7289d)](https://app.codacy.com/gh/iBast/BastienMunck_P7_20210826?utm_source=github.com&utm_medium=referral&utm_content=iBast/BastienMunck_P7_20210826&utm_campaign=Badge_Grade_Settings)
 
+
 # Bilemo API
 
 ## Context
@@ -10,29 +11,29 @@ _This project was made during my OpenClassrooms training path PHP/Symfony_
 
 ## Project Installation
 
-  * copy repository git clone [https://github.com/iBast/BastienMunck_P7_20210826.git](https://github.com/iBast/BastienMunck_P7_20210826.git)
-  * run 
+* copy repository git clone [https://github.com/iBast/BastienMunck_P7_20210826.git](https://github.com/iBast/BastienMunck_P7_20210826.git)
+* run 
 ```console
 $ composer install
 ```
-  * update .env file with your informations and define environnment dev or prod
-  * Create the database with 
+* update .env file with your informations and define environnment dev or prod
+* Create the database with 
 ```console
 $ php bin/console doctrine:database:create
 ```
-  * Create your migrations with  
+* Create your migrations with  
 ```console
 $ php bin/console make:migration
 ```
-  * Migrate your migrations to the database with 
+* Migrate your migrations to the database with 
 ```console
 $ php bin/console doctrine:migrations:migrate
 ```
-  * If you need to procced tests load fixtures into the database with  
+* If you need to procced tests load fixtures into the database with  
 ```console
 $ php bin/console doctrine:fixtures:load
 ```
-  * Generate SSH key for JWT
+* Generate SSH key for JWT
 ```console
 $ mkdir -p config/jwt 
 $ openssl genrsa -out config/jwt/private.pem -aes256 4096
@@ -59,7 +60,7 @@ you will get your token like this
 ```
 
 Now you can send your request with header : 
-```console
+```
 Authorization = Bearer {your token}
 ```
 
@@ -75,5 +76,3 @@ POST | /api/users | Create a new user for the company
 PUT | /api/users{id} | Update the user {id} (should be own by the customer)
 DELETE | /api/users/{id} | Delete the user {id} (should be own by the customer)
  
-
-
